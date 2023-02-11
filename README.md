@@ -1,2 +1,2 @@
-# ecomm
-E-Comm Resource
+# e-comm
+
