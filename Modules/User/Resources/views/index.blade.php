@@ -96,7 +96,7 @@
                             <th></th>
                             <th>No.</th>
                             <th>Name</th>
-                            <th>Email</th>
+                            <th>Phone</th>
                             <th>Level</th>
                             <th>Status</th>
                             <th>Actions</th>

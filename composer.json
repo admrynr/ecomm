@@ -20,6 +20,7 @@
         "php-ffmpeg/php-ffmpeg": "^0.13.0",
         "spatie/laravel-analytics": "^3.6",
         "spatie/laravel-permission": "^2.27",
+        "tymon/jwt-auth": "1.0",
         "yajra/laravel-datatables-oracle": "~8.0"
     },
     "require-dev": {
@@ -33,7 +34,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
+        }
     },
     "extra": {
         "laravel": {

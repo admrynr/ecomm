@@ -41,11 +41,11 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $data = $request->validate([
-            'email' => ['required', 'string'],
+            'phone' => ['required', 'string'],
             'password' => ['required', 'string', 'min:8'],
         ]);
 
-        if (Auth::attempt(['email'=>$data['email'], 'password'=>$data['password']])) {
+        if (Auth::attempt(['phone'=>$data['phone'], 'password'=>$data['password']])) {
             // Authentication passed...
             if(Auth::user()->is_verified==1){
                 if (Auth::user()->level==1){

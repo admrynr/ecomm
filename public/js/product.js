@@ -59,7 +59,7 @@ var user = {
 				}},
 				{ data: null, name: 'image', render:function(data){
 					return '<td><image width="75px" class="rounded mx-auto d-block"' 
-					+'src="'+baseURL+'/public/storage/images/'+data.image+'"></td>';
+					+'src="'+baseURL+'/storage/'+data.image+'"></td>';
 				}},
                 { data: 'base_price', name: 'base_price' },
                 { data: 'final_price', name: 'final_price' },
@@ -176,7 +176,8 @@ var user = {
 	handlePostData : function(){
 		$('.dataForm').validator(['validate']).on('submit', function (e) {
 			if (!e.isDefaultPrevented()) {
-				var data = $(this).serialize();
+				var data = new FormData($(this)[0]);
+				console.log(data);
 				if($(this).find("#id").val() == "" && $(this).find("#method").val() === "store"){
 					var url = baseURL+"/product/store";
 				} else if($(this).find("#id").val() != "" && $(this).find("#method").val() === "update"){
@@ -196,6 +197,8 @@ var user = {
 			type: 'POST',
 			dataType: 'JSON',
 			data: data,
+			processData: false,
+    		contentType: false,
 			success: function(data) {
 				if(data.status == 1){
 					notification._toast('Success', 'Success Update Data', 'success');

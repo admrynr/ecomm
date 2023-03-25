@@ -15,7 +15,6 @@ class CreateProductCategory extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('product_id');
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();
