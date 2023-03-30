@@ -1,4 +1,4 @@
-<form class="dataForm" method="POST" id="dataForm" enctype="multipart/form-data" action="#">
+<form class="dataForm" method="POST" id="dataForm" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="modal-body">
         <div class="row">
@@ -32,8 +32,8 @@
             </div>
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="img" class="control-label">Product Image :</label>
-                    <input type="file" name="img" id="img" class="form-control-file" required>
+                    <label for="file" class="control-label">Product Image :</label>
+                    <input type="file" name="file" required>
                 </div>
             </div>
             <div class="col-md-12">

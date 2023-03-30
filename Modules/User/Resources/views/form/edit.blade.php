@@ -10,8 +10,8 @@
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="nama_client" class="control-label">Email :</label>
-                        <input type="email" name="email" id="email" class="form-control" required>
+                        <label for="nama_client" class="control-label">Phone :</label>
+                        <input type="text" name="phone" id="phone" class="form-control" required>
                     </div>
                 </div>
             </div>

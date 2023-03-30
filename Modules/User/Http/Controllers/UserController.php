@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Validator;
 use App\Helpers\Guzzle;
 use Yajra\Datatables\Datatables;
 use App\User;
@@ -83,10 +84,19 @@ class UserController extends Controller
     //store data
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'numeric', 'digits:12', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
 
         $user = new User();
         $user->name = $request->name;
-        $user->email = $request->email;
+        $user->phone = $request->phone;
         $user->level = 2;
         //
         $user->password = \Hash::make($request->password);
@@ -116,7 +126,7 @@ class UserController extends Controller
         
         $user = User::findOrFail($id);
         $user->name = $request->name;
-        $user->email = $request->email;
+        $user->phone = $request->phone;
         $user->password = $request->password;
 
         if(!$user->update()){
@@ -257,7 +267,7 @@ class UserController extends Controller
             if($request->new_password == $request->confirm_password)
             {
                 $user->username = $request->username;
-                $user->email = $request->email;
+                $user->phone = $request->phone;
                 $user->password = \Hash::make($request->new_password);
                 $user->save();
 
@@ -276,7 +286,7 @@ class UserController extends Controller
             }
         } else {
             $user->username = $request->username;
-            $user->email = $request->email;
+            $user->phone = $request->phone;
             $user->save();
 
             $data = [

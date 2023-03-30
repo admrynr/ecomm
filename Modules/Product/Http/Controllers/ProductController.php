@@ -24,7 +24,6 @@ class ProductController extends Controller
 
         $category = Categories::all();
 
-
         return view('product::index', ['categories' => $category])->withTitle($title);
     }
 
@@ -133,11 +132,26 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        /*
+        $data = $request->validate([
+            'file' => 'required'
+        ]);
+        */
+
         $product = new Product;
 
-        $image = $request->file('img');
+        $image = $request->file('file');
 
-        $upload = Storage::disk('public')->put('images', $image);
+        $name = $image->getClientOriginalName();
+
+        //dd($image);
+
+        $upload = Storage::disk('public')->put('new', $image);
+
+        /*$upload = $image->store(
+            $image, 'public'
+        );
+        */
 
         $product->product_name = $request->name;
         $product->product_type = $request->type;

@@ -41,7 +41,7 @@ var user = {
 					}
 				},
 				{ data: 'name', name: 'name' },
-				{ data: 'email', name: 'email' },
+				{ data: 'phone', name: 'phone' },
 				{ data: null, name: 'level',render:function(data){
 					if(data.level == 2){
 						var level = '<b class="">CUSTOMER</b>';
@@ -203,11 +203,25 @@ var user = {
 				if(data.status == 1){
 					notification._toast('Success', 'Success Update Data', 'success');
 					$("#dataModal").modal("hide");
-					user.handleTable();
+					user.handleTable($('#filter').val());
 				}else{
 					notification._toast('Error', data.message, 'error');
 				}
 			},
+			error: function(response) {
+				if (response.status === 422) {
+					// Handle validation errors
+					var errors = response.responseJSON.errors;
+					var errorMessage = '';
+					$.each(errors, function(key, value) {
+						errorMessage += value[0] + '\n';
+					});
+					// Display errors to the user
+					notification._toast('Error', errorMessage, 'error');
+				} else {
+					// Handle other errors
+				}
+			}
 		});
 	},
 
@@ -215,7 +229,7 @@ var user = {
 		$('#dataModal').on('hidden.bs.modal', function () {
 			$(this).find(".has-error").removeClass("has-error");
 			$('#dataForm').find("input[type=checkbox]").prop('checked',false);
-			$('#dataForm').find("input[type=text], input[type=email], input[type=password], textarea").val("");
+			$('#dataForm').find("input[type=text], input[type=phone], input[type=password], textarea").val("");
 		})
 	},
 
@@ -243,7 +257,7 @@ var user = {
 
 		form.find("#id").val(data.id);
 		form.find("#name").val(data.name);
-		form.find("#email").val(data.email);
+		form.find("#phone").val(data.phone);
 		form.find("#password").val(data.password);
 
         // about.html(data.about);
@@ -280,7 +294,7 @@ var user = {
 				success: function(data){
 					$('#deleteModal').modal('hide');
 					notification._toast('Success', 'Success Delete Data', 'success');
-					user.handleTable();
+					user.handleTable($('#filter').val());
 				}
 			});
 		});
@@ -299,7 +313,7 @@ var user = {
 				success: function(data){
 					$('#approveModal').modal('hide');
 					notification._toast('Success', 'Success Approve Data', 'success');
-					user.handleTable();
+					user.handleTable($('#filter').val());
 				}
 			});
 		});
@@ -320,7 +334,7 @@ var user = {
 				success: function(data){
 					$('#cashierModal').modal('hide');
 					notification._toast('Success', 'Success Change Level', 'success');
-					user.handleTable();
+					user.handleTable($('#filter').val());
 				}
 			});
 		});
@@ -340,7 +354,7 @@ var user = {
 				success: function(data){
 					$('#regularModal').modal('hide');
 					notification._toast('Success', 'Success Change Level', 'success');
-					user.handleTable();
+					user.handleTable($('#filter').val());
 				}
 			});
 		});
@@ -359,7 +373,7 @@ var user = {
 				success: function(data){
 					$('#declineModal').modal('hide');
 					notification._toast('Success', 'User Deactivated', 'success');
-					user.handleTable();
+					user.handleTable($('#filter').val());
 				}
 			});
 		});

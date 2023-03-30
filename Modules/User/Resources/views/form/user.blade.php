@@ -10,8 +10,8 @@
             </div>
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="nama_client" class="control-label">Email :</label>
-                    <input type="email" name="email" id="email" class="form-control" required>
+                    <label for="nama_client" class="control-label">Phone :</label>
+                    <input type="text" name="phone" id="phone" class="form-control" required>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="nama_client" class="control-label">Password Confirmation :</label>
-                    <input type="password" name="confirmation" id="confirmation" class="form-control" required>
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required>
                 </div>
             </div>
         </div>
