@@ -26,7 +26,7 @@
 
                         <div class="form-group row">
 
-                                <input id="phone" type="string" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus placeholder="Phone">
+                                <input id="phone" type="tel" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus placeholder="Phone">
 
                                 @if ($errors->has('phone'))
                                     <span class="invalid-feedback" role="alert">
