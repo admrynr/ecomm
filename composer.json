@@ -36,7 +36,7 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "kylekatarnls/update-helper": true
+            "kylekatarnls/update-helper": false
         }
     },
     "extra": {

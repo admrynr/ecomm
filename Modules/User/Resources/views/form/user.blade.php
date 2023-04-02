@@ -4,14 +4,25 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="nama_client" class="control-label">Name :</label>
+                    <label for="name" class="control-label">Name :</label>
                     <input type="text" name="name" id="name" class="form-control" required>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="nama_client" class="control-label">Phone :</label>
+                    <label for="phone" class="control-label">Phone :</label>
                     <input type="text" name="phone" id="phone" class="form-control" required>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="level" class="control-label">Role :</label>
+                    <select name="level" id="level" class="form-control" required>
+                        <option value="">Select Role --</option>
+                        @foreach ($levels as $level)
+                        <option value="{{$level->id}}">{{$level->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
         </div>

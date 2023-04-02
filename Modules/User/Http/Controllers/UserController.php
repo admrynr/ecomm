@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Helpers\Guzzle;
-use Yajra\Datatables\Datatables;
+use DataTables;
 use App\User;
 use App\Role;
 use App\UserRole;
+use App\Http\Models\UserLevel;
+
 
 
 class UserController extends Controller
@@ -20,26 +22,34 @@ class UserController extends Controller
     public function index()
     {
         $title = 'User Management';
+        $levels = UserLevel::all();
+        //$user = User::where('level', '!=',1)->with('userLevels')->first();
+        //dd($user->userLevels->name);
 
-        return view('user::index')->withTitle($title);
+        return view('user::index')->withTitle($title)->withLevels($levels);
     }
 
     //get data fot DataTable
     public function data(Request $request)
     {
         if ($request->filter == 'all')
-        $user = User::where('level', '!=',1)->get();
+        $user = User::where('level', '!=',1)->with('userLevels');
         else if($request->filter == 'active')
-        $user = User::where('level', '!=',1)->where('is_verified',1)->get();
+        $user = User::where('level', '!=',1)->where('is_verified',1)->with('userLevels');
         else if($request->filter == 'deactive')
-        $user = User::where('level', '!=',1)->where('is_verified',0)->get();
+        $user = User::where('level', '!=',1)->where('is_verified',0)->with('userLevels');
         else
-        $user = User::onlyTrashed()->where('level', '!=',1)->get();
-
-        return datatables::of($user)->make(true);
+        $user = User::onlyTrashed()->where('level', '!=',1)->with('userLevels');
+        
+        return DataTables::eloquent($user)
+                ->addColumn('userLevels', function (User $user) {
+                    return $user->userLevels->name;
+                })
+                ->toJson();
+        //return datatables::of($user)->make(true);
     }
 
-    public function setCashier($id)
+    public function setReseller($id)
     {
         $model = User::findOrFail($id);
         $model->level = 3;
@@ -60,7 +70,7 @@ class UserController extends Controller
 
     }
 
-    public function setRegular($id)
+    public function setMitra($id)
     {
         $model = User::findOrFail($id);
         $model->level = 2;
@@ -97,7 +107,7 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->phone = $request->phone;
-        $user->level = 2;
+        $user->level = $request->level;
         //
         $user->password = \Hash::make($request->password);
         $user->is_verified = 0;
@@ -128,6 +138,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->phone = $request->phone;
         $user->password = $request->password;
+        $user->level = $request->level;
 
         if(!$user->update()){
             $data = [

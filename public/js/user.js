@@ -42,16 +42,13 @@ var user = {
 				},
 				{ data: 'name', name: 'name' },
 				{ data: 'phone', name: 'phone' },
+				{ data: 'userLevels', name: 'userLevels.name' },
+				/*
 				{ data: null, name: 'level',render:function(data){
-					if(data.level == 2){
-						var level = '<b class="">CUSTOMER</b>';
-					}else if(data.level == 3){
-						var level = '<b class="">CASHIER</b>'
-					}else if(data.level == 1){
-						var level = '<b class="">SUPERADMIN</b>'
-					}return level;
+					var level = '<b class="">'+data.userLevels.name+'</b>';
+					return level;
 					}
-				},
+				}, */
                 { data: null, name: 'status',render:function(data){
 					if(data.deleted_at != null){
 						return status = '<b class="text-danger">TRASHED</b>'
@@ -70,14 +67,16 @@ var user = {
 					searchable: false,
 					render: function(data, type, row){
 						if(data.level == 2){
-							var subbutton = "<a data-toggle='modal' data-target='#cashierModal'><button type='button' data-url='"+baseURL+"/user/setCashier/"+data.id+"' class='btn dotip btn-primary btn-outline btn-circle m-r-5 btn-set-cashier' data-toggle='tooltip' title='Set As Cashier'>"
-							+"<i class='ti-money'></i>"
+							$('#role').val('Mitra');
+							$('#user').val(data.name);
+							var subbutton = "<a data-toggle='modal' data-target='#cashierModal'><button type='button' data-url='"+baseURL+"/user/setReseller/"+data.id+"' class='btn dotip btn-primary btn-outline btn-circle m-r-5 btn-set-cashier' data-toggle='tooltip' title='Set As Reseller'>"
+							+"<i class='ti-crown'></i>"
 						+"</button>";
 						}else if(data.level == 3){
-							$('#role').val('Regular User');
+							$('#role').val('Reseller');
 							$('#user').val(data.name);
-							var subbutton = "<a data-toggle='modal' data-target='#cashierModal'><button type='button' data-url='"+baseURL+"/user/setRegular/"+data.id+"' class='btn dotip btn-secondary btn-outline btn-circle m-r-5 btn-set-regular' data-toggle='tooltip' title='Set As Regular User'>"
-							+"<i class='ti-shopping-cart'></i>"
+							var subbutton = "<a data-toggle='modal' data-target='#cashierModal'><button type='button' data-url='"+baseURL+"/user/setMitra/"+data.id+"' class='btn dotip btn-secondary btn-outline btn-circle m-r-5 btn-set-regular' data-toggle='tooltip' title='Set As Mitra'>"
+							+"<i class='ti-money'></i>"
 							+"</button>";
 						}else {
 							var subbutton = "<a ><button type='button'  class='btn dotip btn-light btn-outline btn-circle m-r-5 btn-activate-data' data-toggle='tooltip' disabled title='Super Admin'>"
@@ -235,7 +234,6 @@ var user = {
 
 	handleEditData : function(){
 		$("#dataTable tbody").on("click", ".btn-edt-data",function(){
-            console.log('clicked edit');
 			$.ajax({
 				url: baseURL+"/user/edit/"+$(this).attr("data-id"),
 				type: "GET",
@@ -248,8 +246,8 @@ var user = {
 	},
 
 	handleShowEditForm : function(data){
-		var modal = $("#dataEditModal");
-        var form = $("#dataEditForm");
+		var modal = $("#dataModal");
+        var form = $("#dataForm");
         var about = $('#about');
 
 		modal.modal("show");

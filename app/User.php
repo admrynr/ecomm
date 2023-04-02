@@ -7,7 +7,9 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 //use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-//use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Http\Models\UserLevel;
+
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -19,9 +21,7 @@ class User extends Authenticatable implements JWTSubject
      * @var string[]
      */
     protected $fillable = [
-        'name',
-        'phone',
-        'password',
+        '*'
     ];
 
     /**
@@ -62,5 +62,11 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-    //use SoftDeletes;
+
+    public function userLevels()
+    {
+        return $this->belongsTo(UserLevel::class, 'level');
+    }
+    
+    use SoftDeletes;
 }

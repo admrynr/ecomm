@@ -22,6 +22,6 @@ Route::prefix('user')->middleware('auth')->group(function() {
     Route::get('destroy/{id}', 'UserController@destroy')->name('user.destroy');
     Route::get('info', 'UserController@info')->name('user.info');
     Route::get('bulk/{data}', 'UserController@bulk')->name('user.bulk');
-    Route::get('setCashier/{id}', 'UserController@setCashier')->name('user.setCashier');
-    Route::get('setRegular/{id}', 'UserController@setRegular')->name('user.setRegular');
+    Route::get('setReseller/{id}', 'UserController@setReseller')->name('user.setReseller');
+    Route::get('setMitra/{id}', 'UserController@setMitra')->name('user.setMitra');
 });
