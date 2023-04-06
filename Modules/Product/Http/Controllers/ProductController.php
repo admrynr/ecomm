@@ -146,7 +146,7 @@ class ProductController extends Controller
 
         //dd($image);
 
-        $upload = Storage::disk('public')->put('new', $image);
+        $upload = Storage::disk('public')->put('product', $image);
 
         /*$upload = $image->store(
             $image, 'public'

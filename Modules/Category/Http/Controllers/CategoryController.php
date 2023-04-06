@@ -89,9 +89,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
+
         $category = new Categories;
 
+        $image = $request->file('image');
+
+        $name = $image->getClientOriginalName();
+
+        $upload = Storage::disk('public')->put('category', $image);
+
         $category->name = $request->name;
+        $category->image = $upload;
         $category->save();
 
         $data = [

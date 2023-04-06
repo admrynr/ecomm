@@ -150,6 +150,8 @@ var user = {
 			type: 'POST',
 			dataType: 'JSON',
 			data: data,
+			//processData: false,
+    		contentType: false,
 			success: function(data) {
 				if(data.status == 1){
 					notification._toast('Success', 'Success Update Data', 'success');
