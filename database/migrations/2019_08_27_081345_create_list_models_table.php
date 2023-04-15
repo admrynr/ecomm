@@ -15,11 +15,13 @@ class CreateListModelsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('product_type');
             $table->integer('categories_id');
+            $table->integer('brands_id');
+            $table->integer('colors_id')->nullable();
+            $table->string('size')->nullable();
             $table->string('product_name');
-            $table->integer('base_price');
-            $table->integer('final_price');
+            $table->integer('mitra_price');
+            $table->integer('reseller_price');
             $table->integer('stock');
             $table->integer('is_verified');
             $table->string('image')->default('default.png');

@@ -14,7 +14,9 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         $this->call([
             InitialUserSeeder::class,
-            UserLevelSeeder::class
+            UserLevelSeeder::class,
+            ColorSeeder::class,
+            SizeSeeder::class
          ]);
     }
 }

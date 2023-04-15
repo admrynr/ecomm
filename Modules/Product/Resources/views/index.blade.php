@@ -146,6 +146,11 @@
 
 @section('script-bottom')
         <script type="text/javascript" src="{{ asset("js/product.js") }}"></script>
+        <script>
+            $(document).ready(function() {
+                $('.select2').select2();
+            });
+        </script>
         <script type="text/javascript">
             $(document).ready(function() {
                 appuser.handleUserPage($('#filter').val());
@@ -157,7 +162,7 @@
                     autoclose: true,
                     todayHighlight: true
                 });
-                $('.select2').select2();
             })
         </script>
+        <script src="{{ URL::asset('assets/plugins/bootstrap-filestyle/js/bootstrap-filestyle.min.js')}}"></script>
 @endsection

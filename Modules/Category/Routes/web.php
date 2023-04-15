@@ -11,7 +11,7 @@
 |
 */
 
-Route::prefix('category')->group(function() {
+Route::prefix('admin/category')->middleware('auth')->group(function() {
     Route::get('/', 'CategoryController@index')->name('category.index');
     Route::get('data', 'CategoryController@data')->name('category.data');
     Route::get('info', 'CategoryController@info')->name('category.info');

@@ -26,10 +26,15 @@
                                 </a>
                             </li>
                             <li>
-                                    <a href="{{ route('category.index') }}" class="waves-effect">
-                                            <i class="mdi mdi-equal"></i><span> Category </span>
-                                    </a>
-                                </li>
+                                <a href="{{ route('category.index') }}" class="waves-effect">
+                                        <i class="mdi mdi-equal"></i><span> Category </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('brand.index') }}" class="waves-effect">
+                                        <i class="mdi mdi-equal"></i><span> Brand </span>
+                                </a>
+                            </li>
                             @elseif(Auth::user()->level == 3)
                             <li>
                                 <a href="{{ route('cashier.index') }}" class="waves-effect">

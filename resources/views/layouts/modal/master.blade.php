@@ -20,7 +20,7 @@
     </div>
 </div>
 
-<div class="modal fade dataModal" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="addOrder" aria-hidden="true" style="display: none;">
+<div class="modal fade dataModal" id="dataModal" role="dialog" aria-labelledby="addOrder" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">

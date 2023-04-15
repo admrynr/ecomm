@@ -9,7 +9,12 @@ use Illuminate\Routing\Controller;
 use App\Helpers\Guzzle;
 use Yajra\Datatables\Datatables;
 use App\Http\Models\Product;
+use App\Http\Models\Brands;
+use App\Http\Models\Colors;
 use App\Http\Models\Categories;
+use App\Http\Models\Sizes;
+use App\Http\Models\ProductColors;
+use App\Http\Models\ProductSizes;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -24,7 +29,13 @@ class ProductController extends Controller
 
         $category = Categories::all();
 
-        return view('product::index', ['categories' => $category])->withTitle($title);
+        $brand = Brands::all();
+
+        $colors = Colors::all();
+
+        $sizes = Sizes::all();
+
+        return view('product::index')->withTitle($title)->withBrands($brand)->withCategories($category)->withColors($colors)->withSizes($sizes);
     }
 
     //get data for Edit
@@ -154,14 +165,35 @@ class ProductController extends Controller
         */
 
         $product->product_name = $request->name;
-        $product->product_type = $request->type;
         $product->categories_id = $request->category;
-        $product->base_price = $request->base;
-        $product->final_price = $request->final;
+        $product->brands_id = $request->brand;
+        $product->mitra_price = $request->mitra_price;
+        $product->reseller_price = $request->reseller_price;
         $product->stock = $request->stock;
         $product->is_verified = 0;
         $product->image = $upload;
         $product->save();
+
+        $products_id = $product->id;
+
+        $colors = $request->color;
+        $sizes = $request->size;
+        
+        foreach ($colors as $c) {
+            $pc = new ProductColors;
+
+            $pc->products_id = $products_id;
+            $pc->colors_id = $c;
+            $pc->save();
+        }
+
+        foreach ($sizes as $s) {
+            $ps = new ProductSizes;
+
+            $ps->products_id = $products_id;
+            $ps->sizes_id = $s;
+            $ps->save();
+        }
 
         $data = [
             'status' => 1,

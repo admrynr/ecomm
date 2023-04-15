@@ -71,7 +71,9 @@
                         <li class="dropdown notification-list">
                             <div class="dropdown notification-list nav-pro-img">
                                 <a class="dropdown-toggle nav-link arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="{{ Auth::user()->image == null ? asset('images/default-user.png') : env('MEDIA_URL').Auth::user()->image }}" alt="user" class="rounded-circle"> <b style="margin-left: 5px"> Hello, {{Auth::user()->name}} </b>
+                                @if (Auth::user())
+                                <img src="{{ Auth::user()->image ? env('MEDIA_URL').Auth::user()->image : asset('images/default-user.png') }}" alt="user" class="rounded-circle"> <b style="margin-left: 5px"> Hello, {{Auth::user()->name}} </b>
+                                @endif
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                     <!-- item-->

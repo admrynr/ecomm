@@ -11,7 +11,7 @@
 |
 */
 
-Route::prefix('user')->middleware('auth')->group(function() {
+Route::prefix('admin/user')->middleware('auth')->group(function() {
     Route::get('/', 'UserController@index')->name('user.index');
     Route::get('data', 'UserController@data')->name('user.data');
     Route::post('store', 'UserController@store')->name('user.store');

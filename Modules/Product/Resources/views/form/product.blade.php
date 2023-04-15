@@ -9,17 +9,6 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="form-group">
-                    <label for="type" class="control-label">Type :</label>
-                    <select class="form-control type" name="type" id="type">
-                            <option selected='selected' value="">Select Type</option>
-                            <option value="regular">Regular</option>
-                            <option value="bidding">Bidding</option>
-                    </select> 
-                </div>
-            </div>
-            <div class="col-md-12" id="bidding"></div>
-            <div class="col-md-12">
                     <div class="form-group">
                         <label for="category" class="control-label">Category :</label>
                         <select class="form-control" name="category" id="category">
@@ -32,20 +21,53 @@
             </div>
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="file" class="control-label">Product Image :</label>
+                <label class="control-label">Brand :</label>
+                <select name="brand" class="form-control select2">
+                    <option>Select Brand</option>
+                    @foreach ($brands as $b)
+                    <option value="{{$b->id}}">{{$b->name}}</option>
+                    @endforeach
+                </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                <label class="control-label">Available Colors :</label>
+                <select name="color[]" class="form-control select2 select2-multiple" multiple="multiple" multiple data-placeholder="Choose ...">
+                    <option>Select Colors</option>
+                    @foreach ($colors as $c)
+                    <option value="{{$c->id}}">{{$c->name}}</option>
+                    @endforeach
+                </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                <label class="control-label">Available Size :</label>
+                <select name="size[]" class="form-control select2 select2-multiple" multiple="multiple" multiple data-placeholder="Choose ...">
+                    <option>Select Size</option>
+                    @foreach ($sizes as $s)
+                    <option value="{{$s->id}}">{{$s->name}}</option>
+                    @endforeach
+                </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="file" class="filestyle" data-input="false" data-buttonname="btn-secondary">Product Image :</label>
                     <input type="file" name="file" required>
                 </div>
             </div>
             <div class="col-md-12">
                     <div class="form-group">
-                        <label for="base" class="control-label">Base Price :</label>
-                        <input type="text" name="base" id="base" class="form-control" required>
+                        <label for="base" class="control-label">Mitra Price :</label>
+                        <input type="text" name="mitra_price" id="mitra_price" class="form-control" required>
                     </div>
             </div>
             <div class="col-md-12">
                     <div class="form-group">
-                        <label for="final" class="control-label">Final Price :</label>
-                        <input type="text" name="final" id="final" class="form-control" required>
+                        <label for="final" class="control-label">Reseller Price :</label>
+                        <input type="text" name="reseller_price" id="reseller_price" class="form-control" required>
                     </div>
                 </div>
             <div class="col-md-12">

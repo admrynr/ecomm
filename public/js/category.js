@@ -37,6 +37,10 @@ var user = {
 					}
 				},
 				{ data: 'name', name: 'name' },
+				{ data: null, name: 'image', render:function(data){
+					return '<td><image width="75px" class="rounded mx-auto d-block"' 
+					+'src="'+baseURL+'/storage/'+data.image+'"></td>';
+				}},
 				{
 					data: null,
 					orderable: false,
@@ -130,7 +134,7 @@ var user = {
 	handlePostData : function(){
 		$('#dataForm').validator(['validate']).on('submit', function (e) {
 			if (!e.isDefaultPrevented()) {
-				var data = $(this).serialize();
+				var data = new FormData($(this)[0]);
 				if($(this).find("#id").val() == "" && $(this).find("#method").val() === "store"){
 					var url = baseURL+"/category/store";
 				} else if($(this).find("#id").val() != "" && $(this).find("#method").val() === "update"){
@@ -150,7 +154,7 @@ var user = {
 			type: 'POST',
 			dataType: 'JSON',
 			data: data,
-			//processData: false,
+			processData: false,
     		contentType: false,
 			success: function(data) {
 				if(data.status == 1){

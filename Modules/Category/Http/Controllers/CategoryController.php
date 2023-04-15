@@ -9,6 +9,8 @@ use App\Http\Models\Categories;
 use App\Http\Models\Product;
 use App\Helpers\Guzzle;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Storage;
+
 
 class CategoryController extends Controller
 {
