@@ -361,9 +361,10 @@ var user = {
 				type: "GET",
 				dataType: "JSON",
 				success : function(data){
+					var empty = $('#sub_category').empty();
 					$.each(data, function(index, value) {
 						// Append a new <option> element to the <select> element
-						console.log(data);
+						//console.log(data);
 						$('#sub_category').append($('<option>', {
 						  value: data[index].id,
 						  text: data[index].name
