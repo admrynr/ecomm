@@ -12,6 +12,7 @@ use App\Http\Models\Product;
 use App\Http\Models\Brands;
 use App\Http\Models\Colors;
 use App\Http\Models\Categories;
+use App\Http\Models\SubCategories;
 use App\Http\Models\Sizes;
 use App\Http\Models\ProductColors;
 use App\Http\Models\ProductSizes;
@@ -285,6 +286,13 @@ class ProductController extends Controller
     public function show($id)
     {
         return view('product::show');
+    }
+
+    public function findsubcategory($id)
+    {
+        $subcategories = Categories::find($id)->subcategories;
+        
+        return json_encode($subcategories);
     }
 
 }

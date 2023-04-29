@@ -25,7 +25,7 @@ var user = {
 			destroy: true,
 			// ajax: '/roles/data',
 			ajax: {
-                url: baseURL+"/user/data?filter="+filter,
+                url: baseURL+"/admin/user/data?filter="+filter,
                 method: 'GET',
             },
 			columns: [
@@ -69,13 +69,13 @@ var user = {
 						if(data.level == 2){
 							$('#role').val('Mitra');
 							$('#user').val(data.name);
-							var subbutton = "<a data-toggle='modal' data-target='#cashierModal'><button type='button' data-url='"+baseURL+"/user/setReseller/"+data.id+"' class='btn dotip btn-primary btn-outline btn-circle m-r-5 btn-set-cashier' data-toggle='tooltip' title='Set As Reseller'>"
+							var subbutton = "<a data-toggle='modal' data-target='#cashierModal'><button type='button' data-url='"+baseURL+"/admin/user/setReseller/"+data.id+"' class='btn dotip btn-primary btn-outline btn-circle m-r-5 btn-set-cashier' data-toggle='tooltip' title='Set As Reseller'>"
 							+"<i class='ti-crown'></i>"
 						+"</button>";
 						}else if(data.level == 3){
 							$('#role').val('Reseller');
 							$('#user').val(data.name);
-							var subbutton = "<a data-toggle='modal' data-target='#cashierModal'><button type='button' data-url='"+baseURL+"/user/setMitra/"+data.id+"' class='btn dotip btn-secondary btn-outline btn-circle m-r-5 btn-set-regular' data-toggle='tooltip' title='Set As Mitra'>"
+							var subbutton = "<a data-toggle='modal' data-target='#cashierModal'><button type='button' data-url='"+baseURL+"/admin/user/setMitra/"+data.id+"' class='btn dotip btn-secondary btn-outline btn-circle m-r-5 btn-set-regular' data-toggle='tooltip' title='Set As Mitra'>"
 							+"<i class='ti-money'></i>"
 							+"</button>";
 						}else {
@@ -88,13 +88,13 @@ var user = {
 										+"<i class='ti-pencil-alt'></i>"
 									+"</button>"
 									+subbutton
-									+"<a data-toggle='modal' data-target='#approveModal'><button type='button' data-url='"+baseURL+"/user/approve/"+data.id+"' class='btn dotip btn-info btn-outline btn-circle m-r-5 btn-activate-data' data-toggle='tooltip' title='Approve User'>"
+									+"<a data-toggle='modal' data-target='#approveModal'><button type='button' data-url='"+baseURL+"/admin/user/approve/"+data.id+"' class='btn dotip btn-info btn-outline btn-circle m-r-5 btn-activate-data' data-toggle='tooltip' title='Approve User'>"
 										+"<i class='ti-check'></i>"
 									+"</button>"
 									// +"<button type='button' data-id='"+data.id+"' class='btn btn-info btn-outline btn-circle btn-sm m-r-5 btn-show-permission' data-toggle='tooltip' title='Show Permission'>"
 									//	+"<i class='fa fa-certificate'></i>"
 									// +"</button>"
-									+"<a data-toggle='modal' data-target='#deleteModal'><button type='button' data-url='"+baseURL+"/user/destroy/"+data.id+"' class='btn dotip btn-danger btn-outline btn-circle m-r-5 btn-delete-data' data-toggle='tooltip' title='Delete User'>"
+									+"<a data-toggle='modal' data-target='#deleteModal'><button type='button' data-url='"+baseURL+"/admin/user/destroy/"+data.id+"' class='btn dotip btn-danger btn-outline btn-circle m-r-5 btn-delete-data' data-toggle='tooltip' title='Delete User'>"
 										+"<i class='ti-trash'></i>"
 									+"</button></a>";
 						} else {
@@ -102,13 +102,13 @@ var user = {
 										+"<i class='ti-pencil-alt'></i>"
 									+"</button>"
 									+subbutton
-									+"<a data-toggle='modal' data-target='#declineModal'><button type='button' data-url='"+baseURL+"/user/decline/"+data.id+"' class='btn dotip btn-warning btn-outline btn-circle m-r-5 btn-decline-data' data-toggle='tooltip' title='Deactivate User'>"
+									+"<a data-toggle='modal' data-target='#declineModal'><button type='button' data-url='"+baseURL+"/admin/user/decline/"+data.id+"' class='btn dotip btn-warning btn-outline btn-circle m-r-5 btn-decline-data' data-toggle='tooltip' title='Deactivate User'>"
 										+"<i class='ti-close'></i>"
 									+"</button>"
 									// +"<button type='button' data-id='"+data.id+"' class='btn btn-info btn-outline btn-circle btn-sm m-r-5 btn-show-permission' data-toggle='tooltip' title='Show Permission'>"
 									//	+"<i class='fa fa-certificate'></i>"
 									// +"</button>"
-									+"<a data-toggle='modal' data-target='#deleteModal'><button type='button' data-url='"+baseURL+"/user/destroy/"+data.id+"' class='btn dotip btn-danger btn-outline btn-circle m-r-5 btn-delete-data' data-toggle='tooltip' title='Delete User'>"
+									+"<a data-toggle='modal' data-target='#deleteModal'><button type='button' data-url='"+baseURL+"/admin/user/destroy/"+data.id+"' class='btn dotip btn-danger btn-outline btn-circle m-r-5 btn-delete-data' data-toggle='tooltip' title='Delete User'>"
 										+"<i class='ti-trash'></i>"
 									+"</button></a>";
 						}
@@ -180,9 +180,9 @@ var user = {
 			if (!e.isDefaultPrevented()) {
 				var data = $(this).serialize();
 				if($(this).find("#id").val() == "" && $(this).find("#method").val() === "store"){
-					var url = baseURL+"/user/store";
+					var url = baseURL+"/admin/user/store";
 				} else if($(this).find("#id").val() != "" && $(this).find("#method").val() === "update"){
-					var url = baseURL+"/user/update/"+$(this).find("#id").val();
+					var url = baseURL+"/admin/user/update/"+$(this).find("#id").val();
 				}
 				user.handleStoreData(url, data);
 				return false;
@@ -235,7 +235,7 @@ var user = {
 	handleEditData : function(){
 		$("#dataTable tbody").on("click", ".btn-edt-data",function(){
 			$.ajax({
-				url: baseURL+"/user/edit/"+$(this).attr("data-id"),
+				url: baseURL+"/admin/user/edit/"+$(this).attr("data-id"),
 				type: "GET",
 				dataType: "JSON",
 				success : function(data){
@@ -266,7 +266,7 @@ var user = {
 		$('#bulk-title').html(data);
 		$('#btn-bulk').on('click',function(){
 			$.ajax({
-				url: baseURL+'/user/bulk/'+data+'?id='+bulkdata,
+				url: baseURL+'/admin/user/bulk/'+data+'?id='+bulkdata,
 				type: 'GET',
 				dataType: 'JSON',
 				success: function(data){
@@ -379,7 +379,7 @@ var user = {
 
 	handleInfoData : function(){
 		$.ajax({
-			url: baseURL+"/user/info",
+			url: baseURL+"/admin/user/info",
 			type: 'GET',
 			dataType: 'JSON',
 			success: function(data){

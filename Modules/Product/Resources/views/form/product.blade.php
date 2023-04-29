@@ -8,16 +8,25 @@
                     <input type="text" name="name" id="name" class="form-control" required>
                 </div>
             </div>
-            <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="category" class="control-label">Category :</label>
-                        <select class="form-control" name="category" id="category">
-                                <option selected='selected' value="">Select Category</option>
-                            @foreach ($categories as $c)
-                                <option value="{{$c->id}}">{{$c->name}}</option>
-                            @endforeach
-                        </select> 
-                    </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="category" class="control-label">Category :</label>
+                    <select class="form-control" name="category" id="category">
+                            <option selected='selected' value="">Select Category</option>
+                        @foreach ($categories as $c)
+                            <option value="{{$c->id}}">{{$c->name}}</option>
+                        @endforeach
+                    </select> 
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="category" class="control-label">Sub Category :</label>
+                    <select class="form-control" name="sub_category" id="sub_category">
+                            <option selected='selected' value="">Select Sub Category</option>
+                        
+                    </select> 
+                </div>
             </div>
             <div class="col-md-12">
                 <div class="form-group">
@@ -30,7 +39,7 @@
                 </select>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                 <label class="control-label">Available Colors :</label>
                 <select name="color[]" class="form-control select2 select2-multiple" multiple="multiple" multiple data-placeholder="Choose ...">
@@ -41,7 +50,7 @@
                 </select>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                 <label class="control-label">Available Size :</label>
                 <select name="size[]" class="form-control select2 select2-multiple" multiple="multiple" multiple data-placeholder="Choose ...">

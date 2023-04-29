@@ -10,6 +10,7 @@ var appuser = {
 		user.handleEditData();
 		user.handleInfoData();
 		user.handleDeleteData();
+		user.handleSubCategory();
     },
 };
 
@@ -21,7 +22,7 @@ var user = {
 			destroy: true,
 			// ajax: '/roles/data',
 			ajax: {
-                url: baseURL+"/category/data?filter="+filter,
+                url: baseURL+"/admin/category/data?filter="+filter,
                 method: 'GET',
             },
 			columns: [
@@ -54,7 +55,7 @@ var user = {
 									// +"<button type='button' data-id='"+data.id+"' class='btn btn-info btn-outline btn-circle btn-sm m-r-5 btn-show-permission' data-toggle='tooltip' title='Show Permission'>"
 									//	+"<i class='fa fa-certificate'></i>"
 									// +"</button>"
-									+"<a data-toggle='modal' data-target='#deleteModal'><button type='button' data-url='"+baseURL+"/category/destroy/"+data.id+"' class='btn dotip btn-danger btn-outline btn-circle m-r-5 btn-delete-data' id='btn-delete-data' data-toggle='tooltip' title='Delete User'>"
+									+"<a data-toggle='modal' data-target='#deleteModal'><button type='button' data-url='"+baseURL+"/admin/category/destroy/"+data.id+"' class='btn dotip btn-danger btn-outline btn-circle m-r-5 btn-delete-data' id='btn-delete-data' data-toggle='tooltip' title='Delete User'>"
 										+"<i class='ti-trash'></i>"
 									+"</button></a>";
 						} else {
@@ -64,7 +65,7 @@ var user = {
 									// +"<button type='button' data-id='"+data.id+"' class='btn btn-info btn-outline btn-circle btn-sm m-r-5 btn-show-permission' data-toggle='tooltip' title='Show Permission'>"
 									//	+"<i class='fa fa-certificate'></i>"
 									// +"</button>"
-									+"<a data-toggle='modal' data-target='#deleteModal'><button type='button' data-url='"+baseURL+"/category/destroy/"+data.id+"' class='btn dotip btn-danger btn-outline btn-circle m-r-5 btn-delete-data' id='btn-delete-data' data-toggle='tooltip' title='Delete User'>"
+									+"<a data-toggle='modal' data-target='#deleteModal'><button type='button' data-url='"+baseURL+"/admin/category/destroy/"+data.id+"' class='btn dotip btn-danger btn-outline btn-circle m-r-5 btn-delete-data' id='btn-delete-data' data-toggle='tooltip' title='Delete User'>"
 										+"<i class='ti-trash'></i>"
 									+"</button></a>";
 						}
@@ -136,9 +137,9 @@ var user = {
 			if (!e.isDefaultPrevented()) {
 				var data = new FormData($(this)[0]);
 				if($(this).find("#id").val() == "" && $(this).find("#method").val() === "store"){
-					var url = baseURL+"/category/store";
+					var url = baseURL+"/admin/category/store";
 				} else if($(this).find("#id").val() != "" && $(this).find("#method").val() === "update"){
-					var url = baseURL+"/category/update/"+$(this).find("#id").val();
+					var url = baseURL+"/admin/category/update/"+$(this).find("#id").val();
 				}
 				user.handleStoreData(url, data);
 				return false;
@@ -180,7 +181,7 @@ var user = {
 		$("#dataTableCategory tbody").on("click", ".btn-edt-data",function(){
             console.log('clicked edit');
 			$.ajax({
-				url: baseURL+"/category/edit/"+$(this).attr("data-id"),
+				url: baseURL+"/admin/category/edit/"+$(this).attr("data-id"),
 				type: "GET",
 				dataType: "JSON",
 				success : function(data){
@@ -209,7 +210,7 @@ var user = {
 		$('#bulk-title').html(data);
 		$('#btn-bulk').on('click',function(){
 			$.ajax({
-				url: baseURL+'/category/bulk/'+data+'?id='+bulkdata,
+				url: baseURL+'/admin/category/bulk/'+data+'?id='+bulkdata,
 				type: 'GET',
 				dataType: 'JSON',
 				success: function(data){
@@ -243,12 +244,38 @@ var user = {
 
 	handleInfoData : function(){
 		$.ajax({
-			url: baseURL+"/category/info",
+			url: baseURL+"/admin/category/info",
 			type: 'GET',
 			dataType: 'JSON',
 			success: function(data){
 				$('#total').html(data.total);
 				$('#trashed').html(data.trashed);
+			}
+		});
+	},
+
+	handleSubCategory : function(){
+		$("#addSubCat").on("click", function(){
+			subCategories = $('#sub_categories').val()
+			if (subCategories !== '')
+			{
+				$("#subCategory").append('<div class="col-md-12">'+
+					'<div class="d-flex flex-row justify-content-between align-items-center">'+
+						'<div class="flex-grow-1 mr-2">'+
+							'<div class="form-group">'+
+								'<label for="sub_categories" class="control-label">Sub Categories :</label>'+
+								'<input type="text" name="sub_categories[]" value="'+subCategories+'" class="form-control" required>'+
+							'</div>'+
+						'</div>'+
+						'<div class="">'+
+							'<a href="#" class="btn btn-danger waves-effect deleteSubCat" >X</a>'+
+						'</div>'+
+					'</div>'+
+				'</div>');
+
+				$(".deleteSubCat").on("click", function(){
+					$(this).parent().parent().remove();
+				});
 			}
 		});
 	}

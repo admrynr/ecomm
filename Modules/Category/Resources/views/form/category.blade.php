@@ -15,6 +15,22 @@
                         <input type="file" name="image" required>
                     </div>
                 </div>
+                <div id="subCategory">
+
+                </div>
+                <div class="col-md-12">
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <div class="flex-grow-1 mr-2">
+                            <div class="form-group">
+                                <label for="sub_categories" class="control-label">Sub Categories :</label>
+                                <input type="text" name="sub_categories[]" id="sub_categories" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="" >
+                            <a class="btn btn-success waves-effect" href="#" id="addSubCat">Add Sub Categories</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
                 <input type="hidden" id="method">

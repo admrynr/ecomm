@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use App\Http\Models\Categories;
 use App\Http\Models\Product;
+use App\Http\Models\SubCategories;
 use App\Helpers\Guzzle;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Storage;
@@ -104,6 +105,19 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->image = $upload;
         $category->save();
+
+        $categories_id = $category->id;
+
+        $subcategory = $request->sub_categories;
+
+        foreach($subcategory as $sc)
+        {
+            $subcat = new SubCategories;
+            $subcat->name = $sc;
+            $subcat->categories_id = $categories_id;
+            $subcat->save();
+        }
+
 
         $data = [
             'status' => 1,

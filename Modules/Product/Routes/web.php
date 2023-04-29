@@ -23,4 +23,6 @@ Route::prefix('admin/product')->middleware('auth')->group(function() {
     Route::post('update/{id}', 'ProductController@update')->name('product.update');
     Route::get('destroy/{id}', 'ProductController@destroy')->name('product.destroy');
     Route::get('category', 'ProductController@category')->name('product.category');
+    Route::get('findsubcategory/{id}', 'ProductController@findsubcategory')->name('product.findsubcategory');
+
 });
