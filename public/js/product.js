@@ -41,14 +41,10 @@ var user = {
 					}
 				},
                 { data: 'product_name', name: 'name' },
-                { data: null, name: 'type',render:function(data){
-					if(data.product_type == "regular"){
-						var type = '<b class="">Regular</b>';
-					}else if(data.product_type == "bidding"){
-						var type = '<b class="">Bidding</b>'
-					}return type;
-					}
-                },
+				{ data: null, name: 'image', render:function(data){
+					return '<td><image width="75px" class="rounded mx-auto d-block"' 
+					+'src="'+baseURL+'/storage/'+data.image+'"></td>';
+				}},
                 { data: null, name: 'category',render:function(data){
 					if (data.categories == null)
 					{
@@ -58,12 +54,19 @@ var user = {
 						return data.categories.name;
 					}
 				}},
-				{ data: null, name: 'image', render:function(data){
-					return '<td><image width="75px" class="rounded mx-auto d-block"' 
-					+'src="'+baseURL+'/storage/'+data.image+'"></td>';
+				{ data: null, name: 'sub_category',render:function(data){
+					if (data.subcategories == null)
+					{
+						var unsubcategorized = "Uncategorized";
+						return unsubcategorized;
+					}else{
+						return data.subcategories.name;
+					}
 				}},
-                { data: 'base_price', name: 'base_price' },
-                { data: 'final_price', name: 'final_price' },
+				/*
+				{ data: 'mitra_price', name: 'mitra_price' },
+                { data: 'reseller_price', name: 'reseller_price' },
+				*/
                 { data: 'stock', name: 'stock' },
                 { data: null, name: 'status',render:function(data){
 					if(data.deleted_at != null){

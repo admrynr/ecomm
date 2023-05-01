@@ -94,31 +94,15 @@
                         </a>
                     </div>
                     </div>
-                    {{-- @if(Session::get('user')->level == 1)
-                        <div class="row">
-                            <div class="col-md-2 text-left form-group">
-                                <label class="control-label">Sekolah :</label>
-                                <select class="form-control select2" id="selectsekolah">
-                                    @foreach($sekolah as $sek)
-                                        <option value="{{ $sek->id }}">{{ $sek->nama }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    @else
-                        <input type="hidden" id="selectsekolah" value="{{ Session::get('user')->sekolah_id }}">
-                    @endif --}}
                     <table id="dataTableProduct" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
                             <th></th>
                             <th>No.</th>
                             <th>Name</th>
-                            <th>Type</th>
-                            <th>Category</th>
                             <th>Image</th>
-                            <th>Base Price</th>
-                            <th>Final Price</th>
+                            <th>Category</th>
+                            <th>Sub Category</th>
                             <th>Stock</th>
                             <th>Status</th>
                             <th>Action</th>

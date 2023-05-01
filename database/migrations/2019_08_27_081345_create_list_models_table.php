@@ -16,6 +16,7 @@ class CreateListModelsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('categories_id');
+            $table->integer('sub_categories_id');
             $table->integer('brands_id');
             $table->integer('colors_id')->nullable();
             $table->string('size')->nullable();

@@ -167,6 +167,7 @@ class ProductController extends Controller
 
         $product->product_name = $request->name;
         $product->categories_id = $request->category;
+        $product->sub_categories_id = $request->sub_category;
         $product->brands_id = $request->brand;
         $product->mitra_price = $request->mitra_price;
         $product->reseller_price = $request->reseller_price;
@@ -209,17 +210,17 @@ class ProductController extends Controller
     {
         $categories = Categories::all();
         if ($request->filter == 'all')
-        $product = Product::with('categories')->get();
+        $product = Product::with('categories')->with('subcategories')->get();
         else if($request->filter == 'active')
-        $product = Product::where('is_verified',1)->get();
+        $product = Product::with('categories')->with('subcategories')->where('is_verified',1)->get();
         else if($request->filter == 'deactive')
-        $product = Product::where('is_verified',0)->get();
+        $product = Product::with('categories')->with('subcategories')->where('is_verified',0)->get();
         else if($request->filter == 'trashed')
-        $product = Product::onlyTrashed()->get();
+        $product = Product::with('categories')->with('subcategories')->onlyTrashed()->get();
         else {
             foreach($categories as $c){
                 if($request->filter == $c->name){
-                    $product = Product::with('categories')->where('categories_id',$c->id)->get();
+                    $product = Product::with('categories')->with('subcategories')->where('categories_id',$c->id)->get();
                 }
             }
         }
