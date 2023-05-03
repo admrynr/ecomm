@@ -12,7 +12,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="file" class="control-label">Category Image :</label>
-                        <input type="file" name="image" required>
+                        <input type="file" name="image" id="image" required>
                     </div>
                 </div>
                 <div id="subCategory">

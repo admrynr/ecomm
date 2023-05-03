@@ -196,11 +196,29 @@ var user = {
         var form = $("#dataForm");
         var about = $('#about');
 
+		var subcategories = data.subcategories;
+
 		modal.modal("show");
 		modal.find(".modal-title").text("Edit Data Category");
 
 		form.find("#id").val(data.id);
 		form.find("#name").val(data.name);
+
+		$.each(subcategories, function(index, value) {
+			$("#subCategory").append('<div class="col-md-12">'+
+					'<div class="d-flex flex-row justify-content-between align-items-center">'+
+						'<div class="flex-grow-1 mr-2">'+
+							'<div class="form-group">'+
+								'<label for="sub_categories" class="control-label">Sub Categories :</label>'+
+								'<input type="text" name="sub_categories[]" value="'+subcategories[index].name+'" class="form-control" required>'+
+							'</div>'+
+						'</div>'+
+						'<div class="">'+
+							'<a href="#" class="btn btn-danger waves-effect deleteSubCat" >X</a>'+
+						'</div>'+
+					'</div>'+
+				'</div>');
+		})
 
         // about.html(data.about);
 		form.find("#method").val("update");

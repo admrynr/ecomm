@@ -145,7 +145,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $data = Categories::where('id', $id)->first();
+        $data = Categories::with('subcategories')->where('id', $id)->first();
 
         return json_encode($data);    }
 
